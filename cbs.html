@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CBS Script</title>
+    <style>
+        body {
+            font-size: 32px;
+            line-height: 1.6;
+            font-family: Arial, sans-serif;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 40px;
+        }
+        ul {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CBS is a two-level search algorithm</h1>
+
+<p>
+A high level to resolve conflicts, and a low level to plan paths.
+</p>
+
+<p>
+We start by computing an initial path for each robot independently using A* search, without considering conflicts between robots.
+</p>
+
+<p>
+Then we check for conflicts.
+</p>
+
+<p>
+We organize the search using a Conflict Tree.
+Each node in this tree represents:
+</p>
+
+<ul>
+    <li>a set of constraints</li>
+    <li>a set of paths satisfying those constraints</li>
+    <li>the conflicts detected in those paths</li>
+</ul>
+
+<p>
+We use a best-first search strategy according to the objective (makespan or flowtime).
+</p>
+
+<p>
+If a node contains no conflicts, it is a solution node.
+</p>
+
+<p>
+Otherwise, we select a conflict to resolve. We choose the earliest conflict first, and prioritize vertex conflicts over swap conflicts.
+</p>
+
+<p>
+To resolve the conflict, the algorithm creates two child nodes. Since a conflict is between two agents, the branching factor is 2.
+</p>
+
+<p>
+Each child adds a constraint for one of the conflicting robots.
+</p>
+
+<p>
+For example:
+forbid a robot from being in a specific cell at a specific time,
+or forbid it from traversing a specific edge.
+</p>
+
+<p>
+After adding the constraint, CBS replans only the affected robot using constrained A* search.
+</p>
+
+<p>
+And we continue the search.
+</p>
+
+</body>
+</html>
